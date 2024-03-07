@@ -1,5 +1,6 @@
 from flask import Flask, render_template,request,flash, redirect, url_for
 from registration_form import UserForm
+from server_connect import User_model
 
 app = Flask(__name__)
 app.secret_key= "private_key"
@@ -22,9 +23,11 @@ def login():
 @app.route("/registration", methods=['POST', 'GET'])
 def registration():
     reg_form = UserForm()
+    obj = User_model()
+
     if request.method == 'POST':
         if reg_form.validate():
-            
+            obj.server_upload(reg_form)
             return redirect(url_for('successful'))
         else:
             flash("Please fill out all fields")
@@ -37,6 +40,7 @@ def registration():
 
 @app.route('/successful')
 def successful():
+    name = request.args.get("name")
     return render_template('success_page.html')
 
     if __name__ == "__main__":

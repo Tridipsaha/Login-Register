@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='custom.css') }}">
+    <title>Registration form</title>
+</head>
+<body>
+    <h1>Please fill all the details</h1>
+
+    {% for field in form %}
+        {% if field.errors %}
+            <div class="error-message">{{ field.label }}: {{ ', '.join(field.errors) }}</div>
+        {% endif %}
+    {% endfor %}
+
+    <form method="POST">
+        {{ form.csrf_token }}
+        <div class="table-section">
+            <table>
+                <tr>
+                    <td>{{ form.name.label }}</td>
+                    <td>{{ form.name }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.e_mail.label }}</td>
+                    <td>{{ form.e_mail }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.phone.label }}</td>
+                    <td>{{ form.phone }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.pasw.label }}</td>
+                    <td>{{ form.pasw }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.cnfm_pasw.label }}</td>
+                    <td>{{ form.cnfm_pasw }}</td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>{{ form.gender(class="gender-options") }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>{{ form.submit(class="anchor-button") }}</td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='custom.css') }}">
+
+    <title>Login</title>
+</head>
+<body>
+    <h1>Welcome to login page</h1>
+    <!-- {% for field in form %}
+        {% if field.errors %}
+            <div class="error-message">{{ field.label }}: {{ ', '.join(field.errors) }}</div>
+        {% endif %}
+    {% endfor %} -->
+
+    <form class="login-form" action="http://127.0.0.1:5000/login" method="POST">
+        {{ form.csrf_token }}
+        <div class="table-section">
+            <table>
+                <tr>
+                    <td>{{ form.name.label }}</td>
+                    <td>{{ form.name }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.pasw.label }}</td>
+                    <td>{{ form.pasw }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>{{ form.submit(class="anchor-button") }}</td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
